@@ -52,9 +52,9 @@ def run(rank, n_gpus, hps):
         utils.check_git_hash(hps.model_dir)
         writer = SummaryWriter(log_dir=hps.model_dir)
         writer_eval = SummaryWriter(log_dir=os.path.join(hps.model_dir, "eval"))
-    
-    # for pytorch on win, backend use gloo    
-    dist.init_process_group(backend=  'gloo' if os.name == 'nt' else 'nccl', init_method='env://', world_size=n_gpus, rank=rank)
+
+    # for pytorch on win, backend use gloo
+    dist.init_process_group(backend=  'gloo' if os.name == 'nt' else 'nccl', init_method='env://', world_size=n_gpus, rank=rank, use_libuv=False)
     torch.manual_seed(hps.train.seed)
     torch.cuda.set_device(rank)
     collate_fn = TextAudioCollate()
