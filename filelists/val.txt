@@ -1,0 +1,2 @@
+./dataset/44k/Ray/ray_clip_010.wav
+./dataset/44k/Ray/ray_clip_017.wav
